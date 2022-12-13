@@ -9,9 +9,10 @@ app.get('/api/notes', (req, res) => {
     fs.readFile("./db/db.json", (err, data) => {
         if (err) {
             console.error("Could not read file", err);
+            res.status(500).send({error: 'failed!'}); 
             return;
         } 
-        res.json
+        res.json(JSON.parse(data.toString()));
     })
 
 });
