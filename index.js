@@ -7,6 +7,7 @@ const app = express();
 const port = 3000;
 
 app.use(bodyParser.json());
+app.use(express.static('public'));
 
 app.get('/api/notes', (req, res) => {
     fs.readFile("./db/db.json", (err, data) => {
@@ -16,10 +17,8 @@ app.get('/api/notes', (req, res) => {
             return;
         } 
         res.json(JSON.parse(data.toString()));
-    })
-
+    });
 });
-app.use(express.static('public'))
     
 app.get('/notes', (req, res) => {
     res.sendFile('./public/notes.html', { root: __dirname });
